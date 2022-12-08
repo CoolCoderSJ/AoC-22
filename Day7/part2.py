@@ -52,3 +52,4 @@ for k, v in sizes.items():
         total += v
 
 print(total)
+
