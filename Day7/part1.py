@@ -19,14 +19,14 @@ for line in inp.splitlines():
         if cmd.startswith("cd"):
             path = cmd[3:]
             if path == "..":
-                currentPath = currentPath[:currentPath.rfind("[")]
+                currentPath = currentPath[:currentPath.rfind("/")]
             elif path == "/":
-                currentPath = "['/']"
+                currentPath = "/"
             else:
-                currentPath += "['" + path + "']"
+                currentPath += "/" + path
 
             if currentPath == "":
-                currentPath = "['/']"
+                currentPath = "/"
             
             currentPath = currentPath.replace("//", "/")
 
@@ -38,11 +38,13 @@ for line in inp.splitlines():
                 else:
                     size, filename = f.split(" ")
                     
-                    for p in currentPath.split("['")[1:]:
+                    a = []
+                    for p in currentPath.split("/")[1:]:
+                        a.append(p)
                         p = p[:-2]
                         if p not in sizes:
-                            sizes[p] = 0
-                        sizes[p] += int(size)
+                            sizes["/" + "/".join(a)] = 0
+                        sizes["/" + "/".join(a)] += int(size)
                         
     k += 1
 
