@@ -19,14 +19,14 @@ for line in inp.splitlines():
         if cmd.startswith("cd"):
             path = cmd[3:]
             if path == "..":
-                currentPath = currentPath[:currentPath.rfind("[")]
+                currentPath = currentPath[:currentPath.rfind("/")]
             elif path == "/":
-                currentPath = "['/']"
+                currentPath = "/"
             else:
-                currentPath += "['" + path + "']"
+                currentPath += "/" + path
 
             if currentPath == "":
-                currentPath = "['/']"
+                currentPath = "/"
             
             currentPath = currentPath.replace("//", "/")
 
@@ -38,18 +38,23 @@ for line in inp.splitlines():
                 else:
                     size, filename = f.split(" ")
                     
-                    for p in currentPath.split("['")[1:]:
-                        p = p[:-2]
-                        if p not in sizes:
-                            sizes[p] = 0
-                        sizes[p] += int(size)
+                    a = []
+                    splitPath = currentPath.split("/")
+                    if splitPath == ['', '']: splitPath = ['']
+                    for p in splitPath:
+                        a.append(p)
+                        if ("/" + "/".join(a)).replace("//", "/") not in sizes:
+                            sizes[("/" + "/".join(a)).replace("//", "/")] = 0
+                        sizes[("/" + "/".join(a)).replace("//", "/")] += int(size)
                         
     k += 1
 
-total = 0
+needed = 30000000-(70000000-sizes['/'])
+possible = []
 for k, v in sizes.items():
-    if k != "/" and v <= 100000:
-        total += v
+    if v >= needed:
+        possible.append(v)
+    
 
-print(total)
-
+possible.sort()
+print(possible[0])
