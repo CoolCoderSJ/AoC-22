@@ -39,12 +39,13 @@ for line in inp.splitlines():
                     size, filename = f.split(" ")
                     
                     a = []
-                    for p in currentPath.split("/")[1:]:
+                    splitPath = currentPath.split("/")
+                    if splitPath == ['', '']: splitPath = ['']
+                    for p in splitPath:
                         a.append(p)
-                        p = p[:-2]
-                        if p not in sizes:
-                            sizes["/" + "/".join(a)] = 0
-                        sizes["/" + "/".join(a)] += int(size)
+                        if ("/" + "/".join(a)).replace("//", "/") not in sizes:
+                            sizes[("/" + "/".join(a)).replace("//", "/")] = 0
+                        sizes[("/" + "/".join(a)).replace("//", "/")] += int(size)
                         
     k += 1
 
