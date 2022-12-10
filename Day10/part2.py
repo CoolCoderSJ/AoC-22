@@ -25,12 +25,12 @@ for line in inp.splitlines():
         if cycleInc == 2 and i != 0:
             register += amt
             for j in range(len(spriteLoc)):
-                spriteLoc[j][0] = (cycle-1)//40
+                spriteLoc[j][0] = cycle//40
                 spriteLoc[j][1] += amt
         elif cycleInc == 1:
             register += amt
             for j in range(len(spriteLoc)):
-                spriteLoc[j][0] = (cycle-1)//40
+                spriteLoc[j][0] = cycle//40
                 spriteLoc[j][1] += amt
 
 for i in grid:
