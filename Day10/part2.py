@@ -20,7 +20,7 @@ for line in inp.splitlines():
         if spriteWrite in spriteLoc:
             grid[spriteWrite[0]].append("#")
         else:
-            grid[spriteWrite[0]].append(".")
+            grid[spriteWrite[0]].append(" ")
 
         if cycleInc == 2 and i != 0:
             register += amt
